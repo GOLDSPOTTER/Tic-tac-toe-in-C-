@@ -4,18 +4,23 @@ public class Program
 {
     public static void Main()
 	{
+		//game layout 0|1|2  
+			//		  0|1|2	
+			//		  0|1|2
+		
 		
         string[,] letters = {{"_","_","_"},{"_","_","_"},{"_","_","_"}};
         int Playerturn = 1; 
         bool gameover = false;
-		int spotsleft = 9;
+		int spotsleft = 9; 
 		bool ready = false;
+		//game welcome
 		Console.Write("Hello, welcome to tic tac toe!"); 
 		while (!ready)
 		{
 		Console.WriteLine(" Click E to play");
 		string ans = Console.ReadLine();
-			if (ans == "e" || ans == "E"){
+			if (ans == "e" || ans == "E"){ 
 				ready = true;
 			}
 		}
@@ -25,6 +30,7 @@ public class Program
         while(!gameover)
         { 
 			Console.Clear();
+			//draws the board for the game
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++)
