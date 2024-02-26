@@ -10,11 +10,11 @@ public class Program
 		
 		
         string[,] letters = {{"_","_","_"},{"_","_","_"},{"_","_","_"}};
-        int Playerturn = 1; 
+        int Playerturn = 2; 
         bool gameover = false;
-		int spotsleft = 9; 
-		bool ready = false;
+		int spotsleft = 9;
 		//game welcome
+		bool ready = false;
 		Console.Write("Hello, welcome to tic tac toe!"); 
 		while (!ready)
 		{
@@ -44,48 +44,57 @@ public class Program
 
             while (ask && !gameover && spotsleft > 0)
             { 
-                Console.WriteLine("Player " + Playerturn + ", Write your first dim: ");
+				if (Playerturn == 1){
+					Playerturn = 2;
+				}else{ 
+					Playerturn = 1;
+				}
+                Console.WriteLine("Player " + Playerturn + ", Write your first dim: "); //asks for column 
                 int num1 = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine("Player " + Playerturn + ", Write your second dim: ");
+                Console.WriteLine("Player " + Playerturn + ", Write your second dim: "); //asks for row
                 int num2 = Convert.ToInt32(Console.ReadLine());
 
-                if (num1 < 0 || num1 >= 3 || num2 < 0 || num2 >= 3)
+                if (num1 < 0 || num1 >= 3 || num2 < 0 || num2 >= 3) //Checks if the number is valid
                 {
-                    Console.WriteLine("Invalid input. Please enter numbers between 0 and 2.");
+                    Console.WriteLine("Invalid input. Please enter numbers between 0 and 2."); //Message if the number is invalid
                 }
-                else if (letters[num1, num2]  == "X" || letters[num1, num2] == "O")
+                else if (letters[num1, num2]  == "X" || letters[num1, num2] == "O") //Checks if the spot isn't already taken
                 {
-                    Console.WriteLine("This position is already taken. Try again");
+                    Console.WriteLine("This position is already taken. Try again"); //Message if the spot is already taken
                 }
                 else
                 {
                     if (Playerturn == 1)
                     {
                         letters[num1, num2] = "X";
-                        Playerturn = 2;
 						spotsleft = spotsleft - 1;
                     }
                     else
                     {
                         letters[num1, num2] = "O";
-                        Playerturn = 1;
-						spotsleft = spotsleft - 1;
+						spotsleft = spotsleft - 1; 
                     }
 
                     ask = false;
 
-                    if ((letters[0, 0] == "X" && letters[0, 1] == "X" && letters[0, 2] == "X") || //Winning horizonatlly top
-                        (letters[1, 0] == "X" && letters[1, 1] == "X" && letters[1, 2] == "X") || //Winning horizonatlly middle
-                        (letters[2, 0] == "X" && letters[2, 1] == "X" && letters[2, 2] == "X") || //Winning horizonatlly bottom
-                        (letters[0, 0] == "X" && letters[1, 0] == "X" && letters[2, 0] == "X") || //Winning vertically left
-                        (letters[0, 1] == "X" && letters[1, 1] == "X" && letters[2, 1] == "X") || //Winning vertically middle
-                        (letters[0, 2] == "X" && letters[1, 2] == "X" && letters[2, 2] == "X") || //Winning vertically right
-                        (letters[0, 0] == "X" && letters[1, 1] == "X" && letters[2, 2] == "X") || //Winning diagonally right
-                        (letters[0, 2] == "X" && letters[1, 1] == "X" && letters[2, 0] == "X"))   //Winning diagonally left
+					
+					for(int i = 0; i < 3; i++){
+						if(letters[0, i] == letters[1, i] && letters[1, i] == letters[2, i] && letters[0, i] != "_"){
+							Console.WriteLine("Player {0} won!", Playerturn);
+							// to do: swap number and i below!
+						} else if(letters[i, 0] == letters[i, 1] && letters[i, 1] == letters[i, 2] && letters[i, 0] != "_"){
+							
+						}
+					}
+					
+                    if (
+                        (letters[0, 0] == letters[1, 1] && letters[1, 1] == letters[2, 2] && letters[1, 1] != "_") || //Winning diagonally right
+                        (letters[0, 2] == letters[1, 1] && letters[1,1] == letters[2, 0] && letters[1, 1] != "_"))   //Winning diagonally left
                     {
                         gameover = true;
-                        Console.WriteLine("Player 1 won!");
+                        Console.WriteLine("Player {0} won!", Playerturn);
                     }
+					/*
                     else if ((letters[0, 0] == "O" && letters[0, 1] == "O" && letters[0, 2] == "O") || //Winning horizonatlly top
                              (letters[1, 0] == "O" && letters[1, 1] == "O" && letters[1, 2] == "O") || //Winning horizonatlly middle
                              (letters[2, 0] == "O" && letters[2, 1] == "O" && letters[2, 2] == "O") || //Winning horizonatlly bottom
@@ -98,10 +107,11 @@ public class Program
                         gameover = true;
                         Console.WriteLine("Player 2 won!");
 					
-                    }
+                    }*/
                 }
             }
 			
+			//draw check
 			if (spotsleft == 0)
 			{
 				gameover = true;
