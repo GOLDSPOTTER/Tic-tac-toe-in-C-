@@ -44,7 +44,7 @@ public class Program
 
             while (ask && !gameover && spotsleft > 0)
             { 
-				if (Playerturn == 1){
+				if (Playerturn == 1){ //Changes players turn so the message doesn't tell the wrong player won
 					Playerturn = 2;
 				}else{ 
 					Playerturn = 1;
@@ -66,12 +66,12 @@ public class Program
                 {
                     if (Playerturn == 1)
                     {
-                        letters[num1, num2] = "X";
+                        letters[num1, num2] = "X"; //Player 1 is X
 						spotsleft = spotsleft - 1;
                     }
                     else
                     {
-                        letters[num1, num2] = "O";
+                        letters[num1, num2] = "O"; //Player 2 is O
 						spotsleft = spotsleft - 1; 
                     }
 
@@ -79,11 +79,13 @@ public class Program
 
 					
 					for(int i = 0; i < 3; i++){
-						if(letters[0, i] == letters[1, i] && letters[1, i] == letters[2, i] && letters[0, i] != "_"){
+						if(letters[0, i] == letters[1, i] && letters[1, i] == letters[2, i] && letters[0, i] != "_"){ //Win check
+							gameover = true;
 							Console.WriteLine("Player {0} won!", Playerturn);
-							// to do: swap number and i below!
-						} else if(letters[i, 0] == letters[i, 1] && letters[i, 1] == letters[i, 2] && letters[i, 0] != "_"){
 							
+						} else if(letters[i, 0] == letters[i, 1] && letters[i, 1] == letters[i, 2] && letters[i, 0] != "_"){//Win check
+						gameover = true;
+                        Console.WriteLine("Player {0} won!", Playerturn);
 						}
 					}
 					
