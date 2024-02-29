@@ -10,7 +10,7 @@ public class Program
 		
 		
         string[,] letters = {{"_","_","_"},{"_","_","_"},{"_","_","_"}};
-        int Playerturn = 2; 
+        int Playerturn = 1; 
         bool gameover = false;
 		int spotsleft = 9;
 		//game welcome
@@ -84,11 +84,19 @@ public class Program
 					for(int i = 0; i < 3; i++){
 						if(letters[0, i] == letters[1, i] && letters[1, i] == letters[2, i] && letters[0, i] != "_"){ //Win check
 							gameover = true;
-							Console.WriteLine("Player {0} won!", Playerturn);
+							if(Playerturn  == 2){
+                        Console.WriteLine("Player 1 won!");
+						}else{
+							Console.WriteLine("Player 2 won!");
+							}
 							
 						} else if(letters[i, 0] == letters[i, 1] && letters[i, 1] == letters[i, 2] && letters[i, 0] != "_"){//Win check
 						gameover = true;
-                        Console.WriteLine("Player {0} won!", Playerturn);
+                        if(Playerturn  == 2){
+                        Console.WriteLine("Player 1 won!");
+						}else{
+							Console.WriteLine("Player 2 won!");
+						}
 						}
 					}
 					
@@ -97,7 +105,11 @@ public class Program
                         (letters[0, 2] == letters[1, 1] && letters[1,1] == letters[2, 0] && letters[1, 1] != "_"))   //Winning diagonally left
                     {
                         gameover = true;
-                        Console.WriteLine("Player {0} won!", Playerturn);
+						if(Playerturn  == 2){
+                        Console.WriteLine("Player 1 won!");
+						}else{
+							Console.WriteLine("Player 2 won!");
+											  }
                     }
 					
                 }
