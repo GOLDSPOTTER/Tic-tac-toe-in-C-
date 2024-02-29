@@ -41,14 +41,11 @@ public class Program
             }
 
             bool ask = true;
-
             while (ask && !gameover && spotsleft > 0)
             { 
-				if (Playerturn == 1){ //Changes players turn so the message doesn't tell the wrong player won
-					Playerturn = 2;
-				}else{ 
-					Playerturn = 1;
-				}
+
+				
+				
                 Console.WriteLine("Player " + Playerturn + ", Write your first dim: "); //asks for column 
                 int num1 = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("Player " + Playerturn + ", Write your second dim: "); //asks for row
@@ -58,7 +55,7 @@ public class Program
                 {
                     Console.WriteLine("Invalid input. Please enter numbers between 0 and 2."); //Message if the number is invalid
                 }
-                else if (letters[num1, num2]  == "X" || letters[num1, num2] == "O") //Checks if the spot isn't already taken
+                else if (letters[num1, num2]  == "X" || letters[num1, num2] == "O") //Checks if the spot is already taken
                 {
                     Console.WriteLine("This position is already taken. Try again"); //Message if the spot is already taken
                 }
@@ -66,13 +63,19 @@ public class Program
                 {
                     if (Playerturn == 1)
                     {
+						
                         letters[num1, num2] = "X"; //Player 1 is X
 						spotsleft = spotsleft - 1;
+						Playerturn = 2;
+						
                     }
                     else
                     {
+						
                         letters[num1, num2] = "O"; //Player 2 is O
 						spotsleft = spotsleft - 1; 
+						Playerturn = 1;
+						
                     }
 
                     ask = false;
@@ -96,20 +99,7 @@ public class Program
                         gameover = true;
                         Console.WriteLine("Player {0} won!", Playerturn);
                     }
-					/*
-                    else if ((letters[0, 0] == "O" && letters[0, 1] == "O" && letters[0, 2] == "O") || //Winning horizonatlly top
-                             (letters[1, 0] == "O" && letters[1, 1] == "O" && letters[1, 2] == "O") || //Winning horizonatlly middle
-                             (letters[2, 0] == "O" && letters[2, 1] == "O" && letters[2, 2] == "O") || //Winning horizonatlly bottom
-                             (letters[0, 0] == "O" && letters[1, 0] == "O" && letters[2, 0] == "O") || //Winning vertically left
-                             (letters[0, 1] == "O" && letters[1, 1] == "O" && letters[2, 1] == "O") || //Winning vertically middle
-                             (letters[0, 2] == "O" && letters[1, 2] == "O" && letters[2, 2] == "O") || //Winning vertically right
-                             (letters[0, 0] == "O" && letters[1, 1] == "O" && letters[2, 2] == "O") || //Winning diagonally right
-                             (letters[0, 2] == "O" && letters[1, 1] == "O" && letters[2, 0] == "O"))   //Winning diagonally left
-                    {
-                        gameover = true;
-                        Console.WriteLine("Player 2 won!");
 					
-                    }*/
                 }
             }
 			
